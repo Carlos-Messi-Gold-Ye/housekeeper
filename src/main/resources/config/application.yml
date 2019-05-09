@@ -1,0 +1,80 @@
+druid:
+  url: jdbc:mysql://139.159.186.21:3306/yezy_test?createDatabaseIfNotExist=true&useUnicode=true&useUnicode=true&characterEncoding=utf8&autoReconnect=true&verifyServerCertificate=false&useSSL=false&sessionVariables=sql_mode='NO_ENGINE_SUBSTITUTION'&jdbcCompliantTruncation=false
+  driver-class: com.mysql.jdbc.Driver
+  username: root
+  password: root
+  initial-size: 1
+  min-idle: 1
+  max-active: 20
+  test-on-borrow: true
+  max-wait: 60000
+  time-between-eviction-runs-millis: 60000
+  min-evictable-idle-time-millis: 300000
+  validation-query: SELECT 1 FROM DUAL
+  test-While-Idle: true
+  test-on-return: false
+  pool-prepared-statements: false
+  max-pool-prepared-statement-per-connection-size: 20
+  filters: stat,wall,log4j,config
+  service-name: portal_dev
+  scan-packages: [com.yezy.entity.house]
+  auto-generate-ddl: true
+  show-sql: true
+
+spring:
+  mvc:
+    favicon:
+      enabled: false
+    throw-exception-if-no-handler-found: true
+    static-path-pattern: /statics/**
+
+server:
+  port: 8002
+
+rad:
+  filter:
+    single-sign-out-url-patterns: ['/route/*']
+    auth-url-patterns: ['/route/*']
+
+logging:
+  pattern:
+    console: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%logger){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"
+  level:
+    ROOT: INFO
+    org.apache: ERROR
+    org.apache.http: DEBUG
+    org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader: ERROR
+    org.springframework.web: ERROR
+    org.springframework.security.web.util.matcher: ERROR
+    org.springframework.bean: ERROR
+    org.springframework.context: ERROR
+    org.xnio: ERROR
+    springfox: ERROR
+    io.undertow: ERROR
+    org.hibernate: ERROR
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.dozer: ERROR
+    jdbc.connection: OFF
+    jdbc.resultset: OFF
+    jdbc.resultsettable: INFO
+    jdbc.audit: OFF
+    jdbc.sqltiming: OFF
+    jdbc.sqlonly: INFO
+    com.minlia.mit: DEBUG
+    com.minlia.cloud: OFF
+    com.zaxxer.hikari: OFF
+    javax.management: OFF
+    com.minlia: DEBUG
+    org.springframework.cache: DEBUG
+    org.springframework.support: DEBUG
+    org.springframework.context.annotation: ERROR
+    org.springframework.cache.interceptor: DEBUG
+    org.springframework.jdbc.core: debug
+    org.apache.ibatis: DEBUG
+    org.mybatis: DEBUG
+    com.hazelcast: INFO
+    org.aopalliance.intercept: DEBUG
+    org.apache.http.impl.conn: ERROR
+    org.apache.http.wire: ERROR
+    com.yezy.mapper: debug

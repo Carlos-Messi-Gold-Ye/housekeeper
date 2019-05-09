@@ -1,0 +1,5 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.yezy.framework.druid.DruidAutoConfiguration,\
+com.yezy.framework.druid.DruidMonitorAutoConfiguration,\
+com.yezy.framework.monitor.MonitorConfiguration,\
+com.yezy.framework.redis.RedisAutoConfiguration

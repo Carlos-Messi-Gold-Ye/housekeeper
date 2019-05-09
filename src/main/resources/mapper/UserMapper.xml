@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yezy.mapper.user">
+
+    <resultMap id="userPageListMap" type="com.yezy.controller.response.UserPagResponse">
+        <id property="userId" column="USER_ID"/>
+        <result property="loginName" column="LOGIN_NAME"/>
+        <result property="displayName" column="DISPLAY_NAME"/>
+    </resultMap>
+
+    <select id="selectUserPageList___count___" resultType="Long">
+        SELECT COUNT(*)
+        <include refid="userPageListFromAndWhere"/>
+    </select>
+
+    <select id="selectUserPageList" resultMap="userPageListMap">
+        SELECT
+        u.USER_ID,
+        u.LOGIN_NAME,
+        u.DISPLAY_NAME
+        <include refid="configFormPageListFromAndWhere"/>
+        ORDER BY c.USER_ID DESC
+    </select>
+
+    <sql id="configFormPageListFromAndWhere">
+        FROM HOUSE_USER u
+        <if test="@com.yezy.framework.util.MybatisOGNL@isNotEmpty(wsLinkManName)">
+            INNER JOIN HOUSE_ACCOUNT SA ON SA.ACCOUNT_ID = CD.USER_ID AND SA.DISPLAY_NAME LIKE #{wsLinkManName}
+        </if>
+        <where>
+            <if test="@com.yezy.framework.util.MybatisOGNL@isNotEmpty(customerDetailId)">
+                AND c.USER_ID = #{userId}
+            </if>
+            <if test="@com.yezy.framework.util.MybatisOGNL@isEmpty(customerDetailId)">
+                <if test="@com.yezy.framework.util.MybatisOGNL@isNotEmpty(customerCodes)">
+                    AND cd.USER_NAME IN
+                    <foreach item="customerCode" collection="customerCodes" open="(" close=")" separator=",">
+                        #{userNames}
+                    </foreach>
+                </if>
+            </if>
+
+        </where>
+    </sql>
+</mapper>

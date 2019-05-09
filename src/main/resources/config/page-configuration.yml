@@ -1,0 +1,10 @@
+page-configuration-list:
+  pages:
+    [
+    {
+      page-id: USER_PAGE,
+      sql-id: com.yezy.mapper.configform.selectUserPageList,
+      param-handler: com.yezy.service.page.handler.UserPageParamHandler,
+      result-handler: com.yezy.service.page.handler.UserPageResultHandler,
+    }
+    ]
